@@ -1,7 +1,7 @@
 import { pool } from '../db.js';  
 
 export const obtenerDetallesVenta = async (req, res) => {
-    const { id } = req.params; // Obtiene el id de los parámetros de la URL
+    const { id, numero_factura } = req.params; // Obtiene el id de los parámetros de la URL
     try {
       const [result] = await pool.query(
         `
@@ -13,11 +13,11 @@ export const obtenerDetallesVenta = async (req, res) => {
           dv.precio_unitario,
           p.nombre_producto,
           (dv.cantidad * dv.precio_unitario) AS subtotal
-        FROM Detalles_Ventas dv
+        FROM Detalle_Venta dv
         INNER JOIN Productos p ON dv.id_producto = p.id_producto
         WHERE dv.numero_factura = ?
       `,
-        [id]
+        [id, numero_factura]
       );
   
       if (result.length === 0) {

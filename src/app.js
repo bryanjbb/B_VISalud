@@ -5,6 +5,8 @@ import rutasLaboratorios from './routes/laboratorio.routes.js'
 import rutasPresentacion from './routes/presentacion.routes.js'
 import rutasEstadisticas from "./routes/estadisticas.routes.js"
 import rutasVentas from "./routes/ventas.routes.js"
+import rutasDetalleventas from "./routes/detalles_ventas.routes.js"
+import rutasUsuarios from "./routes/usuarios.routes.js  "
 const app = express();
 
 // Habilitar CORS para cualquier origen
@@ -18,17 +20,18 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 
 app.use(express.json());
-
+app.use('/api', rutasUsuarios);
 app.use('/api', rutasProductos);
 app.use('/api', rutasLaboratorios);
 app.use('/api', rutasPresentacion);
 app.use('/api', rutasEstadisticas)
 app.use('/api', rutasVentas);
+app.use('/api', rutasDetalleventas)
 
 // Manejo de rutas no encontradas
 app.use((req, res, next) => {
     res.status(404 ).json({
-    message: 'La ruta que ha especificado no se encuentra registrada.'
+    message: 'La ruta que ha especificado no esta registrada.'
     });
 });
 
