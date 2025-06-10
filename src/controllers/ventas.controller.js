@@ -75,7 +75,7 @@ export const registrarVenta = async (req, res) => {
 
   try {
     const [ventaResult] = await pool.query(
-      'INSERT INTO ventas (usuario, fecha_venta, total_venta) VALUES (?, ?, ?)',
+      'INSERT INTO ventas (id_usuario, fecha_venta, total_venta) VALUES (?, ?, ?)',
       [id_usuario, fecha_venta, total_venta]
     );
 
